@@ -13,18 +13,19 @@ fCalculaPorcentagem = (numero, porcentagem) => {
     
 };
 
-module.exports = async function(context, req){
-let porcentagemIndicada = Number(req.query.porcentagem);
-let numeroIndicado = Number(req.query.numero);
+module.exports = async (context, req) => {
+    let porcentagemIndicada = Number(req.query.porcentagem);
+    let numeroIndicado = Number(req.query.numero);
 
-if (isNaN(porcentagem) || isNaN(numero)) {
-    return res.status(400).send('Dados incorretos, os campos aceitam somente numeros')
-}
+    if (isNaN(porcentagem) || isNaN(numero)) {
+        return res.status(400).send('Dados incorretos, os campos aceitam somente numeros');
+    }
 
-let calcularPrcentagem = fCalculaPorcentagem(numero, porcentagem);
+    let valorPorcentagem = fCalculaPorcentagem(porcentagemIndicada, numeroIndicado);
 
-context.res.json({
-    porcentagem: porcentagemIndicada,
-    numero: numeroIndicado
-});
+    context.res.json({
+        porcentagem: porcentagemIndicada,
+        numero: numeroIndicado,
+        resultado: valorPorcentagem
+    });
 }
