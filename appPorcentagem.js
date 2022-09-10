@@ -1,31 +1,22 @@
-const express  = require('express');
-const api = express();
-
-
-api.get('/teste', (req, res) => {
-    return res.status(200).send('Nossa API esta funcionando!');
-});
-
-
+// Para funcionar no azure nós nao precisamos do codigo que estava aqui na parte de cima
 
 fCalculaPorcentagem = (numero, porcentagem) => {
     return (porcentagem*numero)/100;
     
 };
 
-module.exports = async (context, req) => {
+module.exports = async function(context, req){
     let porcentagemIndicada = Number(req.query.porcentagem);
     let numeroIndicado = Number(req.query.numero);
 
-    if (isNaN(porcentagem) || isNaN(numero)) {
-        return res.status(400).send('Dados incorretos, os campos aceitam somente numeros');
+    if (isNaN(porcentagemIndicada) || isNaN(numeroIndicado)) {
+        return context.res.status(400).send('Dados incorretos, os campos aceitam somente numeros')
     }
 
-    let valorPorcentagem = fCalculaPorcentagem(porcentagemIndicada, numeroIndicado);
+    let calcularPrcentagem = fCalculaPorcentagem(numeroIndicado, porcentagemIndicada);
 
     context.res.json({
         porcentagem: porcentagemIndicada,
-        numero: numeroIndicado,
-        resultado: valorPorcentagem
+        numero: numeroIndicado
     });
 }
